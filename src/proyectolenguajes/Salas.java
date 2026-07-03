@@ -9,10 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.util.ArrayList;
 
 public class Salas extends javax.swing.JFrame {
     
     private int contadorSalas = 0;
+    private ArrayList<SalaCine> listaSalas = new ArrayList<>();
 
     /**
      * Creates new form Salas
@@ -97,14 +99,32 @@ public class Salas extends javax.swing.JFrame {
         JOptionPane.PLAIN_MESSAGE       
         );
         
-        //Validacion de cantidad de asientos
+        //VALIDACION DE DATOS
         
         if (respuesta == JOptionPane.OK_OPTION) {
+            if (txtFilas.getText().isEmpty() || txtColumnas.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Debe completar las filas y columnas."
+            );
+            return;
+            }
             String textoFilas = txtFilas.getText().trim();
             String textoColumnas = txtColumnas.getText().trim();
             
-            int filas = Integer.parseInt(textoFilas);
-            int columnas = Integer.parseInt(textoColumnas);
+            int filas;
+            int columnas;
+            
+            try {
+                filas = Integer.parseInt(textoFilas);
+                columnas = Integer.parseInt(textoColumnas);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Solo debe ingresar números enteros."
+                );
+                return;
+            }
             
             if (filas <= 0 || columnas <= 0) {
                 JOptionPane.showMessageDialog(
@@ -119,12 +139,21 @@ public class Salas extends javax.swing.JFrame {
             
             contadorSalas++;
             
+            SalaCine nuevaSala = new SalaCine(
+                contadorSalas,
+                filas,
+                columnas
+            );
+
+            listaSalas.add(nuevaSala);
+
+            JButton botonSala = new JButton(
+                "Sala " + nuevaSala.getNumero()
+            );
+            
             //CREACION DEL BOTON SALA CON SUS PROPIEDADES
             
-            JButton botonSala = new JButton("Sala " + contadorSalas);
-            botonSala.putClientProperty("filas", filas);
-            botonSala.putClientProperty("columnas", columnas);
-            botonSala.putClientProperty("numeroSala", contadorSalas);
+            botonSala.putClientProperty("sala", nuevaSala);
             botonSala.addActionListener(this::seleccionarSala);
             botonSala.setMinimumSize(
                 new Dimension(100, 60)
@@ -185,10 +214,19 @@ public class Salas extends javax.swing.JFrame {
     private void seleccionarSala(ActionEvent e) {
         JButton botonSeleccionado = (JButton) e.getSource();
 
-        int filas = (int) botonSeleccionado.getClientProperty("filas");
-        int columnas = (int) botonSeleccionado.getClientProperty("columnas");
+        SalaCine salaSeleccionada =
+        (SalaCine) botonSeleccionado.getClientProperty("sala");
 
-        System.out.println("Filas: " + filas);
-        System.out.println("Columnas: " + columnas);
+        System.out.println(
+            "Número: " + salaSeleccionada.getNumero()
+        );
+
+        System.out.println(
+            "Filas: " + salaSeleccionada.getFilas()
+        );
+
+        System.out.println(
+            "Columnas: " + salaSeleccionada.getColumnas()
+        );
     }
 }
