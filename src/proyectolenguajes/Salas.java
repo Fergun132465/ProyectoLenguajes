@@ -221,17 +221,10 @@ public class Salas extends javax.swing.JFrame {
 
         SalaCine salaSeleccionada =
         (SalaCine) botonSeleccionado.getClientProperty("sala");
+        
+        VistaSala ventana = new VistaSala(salaSeleccionada);
+        ventana.setVisible(true);
+        this.dispose();
 
-        System.out.println(
-            "Número: " + salaSeleccionada.getNumero()
-        );
-
-        System.out.println(
-            "Filas: " + salaSeleccionada.getFilas()
-        );
-
-        System.out.println(
-            "Columnas: " + salaSeleccionada.getColumnas()
-        );
     }
 }

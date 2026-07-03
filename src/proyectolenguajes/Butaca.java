@@ -1,17 +1,20 @@
 package proyectolenguajes;
 
 public class Butaca {
+    //VARIABLES
     private int fila;
     private int columna;
     private EstadoButaca estado;
     
+    //CONSTRUCTOR
     public Butaca(int fila, int columna) {
     this.fila = fila;
     this.columna = columna;
     this.estado = EstadoButaca.LIBRE;
     }
 
-        public int getFila() {
+    //METODOS GET
+    public int getFila() {
         return fila;
     }
 
@@ -23,6 +26,7 @@ public class Butaca {
         return estado;
     }
     
+    //METODOS DE ESTADO
     public boolean reservar() {
     if (estado == EstadoButaca.LIBRE) {
         estado = EstadoButaca.RESERVADA;
