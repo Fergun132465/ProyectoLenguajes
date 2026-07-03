@@ -102,6 +102,7 @@ public class Salas extends javax.swing.JFrame {
         //VALIDACION DE DATOS
         
         if (respuesta == JOptionPane.OK_OPTION) {
+            
             if (txtFilas.getText().isEmpty() || txtColumnas.getText().isEmpty()) {
             JOptionPane.showMessageDialog(
                 this,
@@ -109,6 +110,7 @@ public class Salas extends javax.swing.JFrame {
             );
             return;
             }
+            
             String textoFilas = txtFilas.getText().trim();
             String textoColumnas = txtColumnas.getText().trim();
             
@@ -132,12 +134,14 @@ public class Salas extends javax.swing.JFrame {
                     "Las filas y columnas deben ser mayores que cero."
                 );
                 return;
-            } else if (filas > 27 || columnas > 27){
+            } else if (filas > 26 || columnas > 26){
                 JOptionPane.showMessageDialog(this, "El maximo de filas y columnas es 27");
                 return;
             }
             
             contadorSalas++;
+            
+            //CREACION DEL OBJETO SalaCine
             
             SalaCine nuevaSala = new SalaCine(
                 contadorSalas,
@@ -211,6 +215,7 @@ public class Salas extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollSalas;
     // End of variables declaration//GEN-END:variables
 
+    //METODO DE CADA BOTON SALA AL PULSAR
     private void seleccionarSala(ActionEvent e) {
         JButton botonSeleccionado = (JButton) e.getSource();
 

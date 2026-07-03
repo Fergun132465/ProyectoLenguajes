@@ -42,7 +42,7 @@ public class Butaca {
     }
     
     public boolean liberar() {
-    if (estado != EstadoButaca.LIBRE) {
+    if (estado == EstadoButaca.OCUPADA) {
         estado = EstadoButaca.LIBRE;
         return true;
     }
