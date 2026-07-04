@@ -26,13 +26,13 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnAgregarSala" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="451" max="32767" attributes="0"/>
+              <EmptySpace pref="973" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="7" max="32767" attributes="0"/>
-                  <Component id="scrollSalas" min="-2" pref="538" max="-2" attributes="0"/>
-                  <EmptySpace pref="7" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="scrollSalas" pref="1062" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -42,12 +42,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnAgregarSala" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="337" max="32767" attributes="0"/>
+              <EmptySpace pref="534" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="47" max="32767" attributes="0"/>
-                  <Component id="scrollSalas" min="-2" pref="313" max="-2" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                  <Component id="scrollSalas" min="-2" pref="513" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

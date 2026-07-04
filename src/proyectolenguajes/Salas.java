@@ -1,7 +1,9 @@
 
 package proyectolenguajes;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -21,6 +23,21 @@ public class Salas extends javax.swing.JFrame {
      */
     public Salas() {
         initComponents();
+        
+        //DISEÑO DE LA VENTANA
+        setLocationRelativeTo(null);
+
+        JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelSuperior.add(btnAgregarSala);
+
+        getContentPane().removeAll();
+        getContentPane().setLayout(new BorderLayout(10, 10));
+
+        getContentPane().add(panelSuperior, BorderLayout.NORTH);
+        getContentPane().add(scrollSalas, BorderLayout.CENTER);
+
+        revalidate();
+        repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -53,23 +70,23 @@ public class Salas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAgregarSala)
-                .addContainerGap(451, Short.MAX_VALUE))
+                .addContainerGap(973, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(7, Short.MAX_VALUE)
-                    .addComponent(scrollSalas, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(7, Short.MAX_VALUE)))
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(scrollSalas, javax.swing.GroupLayout.DEFAULT_SIZE, 1062, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAgregarSala)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addContainerGap(534, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(47, Short.MAX_VALUE)
-                    .addComponent(scrollSalas, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(44, Short.MAX_VALUE)
+                    .addComponent(scrollSalas, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
 

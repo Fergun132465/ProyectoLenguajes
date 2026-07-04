@@ -17,15 +17,18 @@ import javax.swing.SwingConstants;
  */
 public class VistaSala extends javax.swing.JFrame {
 
+    //OBJETOS
     private SalaCine sala;
     private JPanel panelLetras;
     private JPanel panelNumeros;
-    
+    private Butaca butacaSeleccionada;
     /**
      * Creates new form VistaSala
      */
     public VistaSala(SalaCine sala) {
         initComponents();
+        
+        setLocationRelativeTo(null);
         
         this.sala = sala;
         
@@ -82,6 +85,8 @@ public class VistaSala extends javax.swing.JFrame {
 
                 JButton botonButaca = new JButton("L");
                 botonButaca.setPreferredSize(new Dimension(anchoButaca, altoButaca));
+                
+                botonButaca.addActionListener(this::seleccionarButaca);
 
                 botonButaca.putClientProperty("butaca", butaca);
 
@@ -105,6 +110,25 @@ public class VistaSala extends javax.swing.JFrame {
         panelNumeros.revalidate();
         panelNumeros.repaint();
     }
+    
+    //EVENTO SELECCIONAR BUTACA
+    private void seleccionarButaca(java.awt.event.ActionEvent e) {
+
+        JButton botonSeleccionado = (JButton) e.getSource();
+        
+        butacaSeleccionada = (Butaca) botonSeleccionado.getClientProperty("butaca");
+        
+        int fila = butacaSeleccionada.getFila();
+        int columna = butacaSeleccionada.getColumna();
+        
+        char letraFila = (char) ('A' + fila);
+        int numeroColumna = columna + 1;
+        
+        lblFila.setText("Fila: " + letraFila);
+        lblColumna.setText("Columna: " + numeroColumna);
+        lblButaca.setText("Butaca: " + letraFila + numeroColumna);
+        lblEstado.setText("Estado: " + butacaSeleccionada.getEstado());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,6 +141,23 @@ public class VistaSala extends javax.swing.JFrame {
 
         scrollAsientos = new javax.swing.JScrollPane();
         panelAsientos = new javax.swing.JPanel();
+        panelDerecho = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblFila = new javax.swing.JLabel();
+        lblColumna = new javax.swing.JLabel();
+        lblButaca = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,10 +171,72 @@ public class VistaSala extends javax.swing.JFrame {
         );
         panelAsientosLayout.setVerticalGroup(
             panelAsientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
 
         scrollAsientos.setViewportView(panelAsientos);
+
+        panelDerecho.setLayout(new java.awt.GridLayout(3, 0, 0, 10));
+
+        jPanel1.setLayout(new java.awt.GridLayout(5, 0));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setText("BUTACA SELECCIONADA");
+        jPanel1.add(jLabel1);
+
+        lblFila.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFila.setText("Fila: -");
+        jPanel1.add(lblFila);
+
+        lblColumna.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblColumna.setText("Columna: -");
+        jPanel1.add(lblColumna);
+
+        lblButaca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblButaca.setText("Butaca: -");
+        jPanel1.add(lblButaca);
+
+        lblEstado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEstado.setText("Estado: -");
+        jPanel1.add(lblEstado);
+
+        panelDerecho.add(jPanel1);
+
+        jPanel3.setLayout(new java.awt.GridLayout(4, 0, 0, 10));
+
+        jButton1.setText("jButton1");
+        jPanel3.add(jButton1);
+
+        jButton2.setText("jButton2");
+        jPanel3.add(jButton2);
+
+        jButton3.setText("jButton3");
+        jPanel3.add(jButton3);
+
+        jButton4.setText("jButton4");
+        jPanel3.add(jButton4);
+
+        panelDerecho.add(jPanel3);
+
+        jPanel2.setLayout(new java.awt.GridLayout(4, 0, 0, 10));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Libres: -");
+        jPanel2.add(jLabel2);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Reservadas: -");
+        jPanel2.add(jLabel3);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Ocupadas: -");
+        jPanel2.add(jLabel4);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Total: -");
+        jPanel2.add(jLabel5);
+
+        panelDerecho.add(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,14 +244,18 @@ public class VistaSala extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addComponent(scrollAsientos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelDerecho, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollAsientos)
+                    .addComponent(panelDerecho, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -156,7 +263,24 @@ public class VistaSala extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblButaca;
+    private javax.swing.JLabel lblColumna;
+    private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblFila;
     private javax.swing.JPanel panelAsientos;
+    private javax.swing.JPanel panelDerecho;
     private javax.swing.JScrollPane scrollAsientos;
     // End of variables declaration//GEN-END:variables
 }
