@@ -10,7 +10,7 @@ public class Butaca {
     public Butaca(int fila, int columna) {
     this.fila = fila;
     this.columna = columna;
-    this.estado = EstadoButaca.LIBRE;
+    this.estado = EstadoButaca.OCUPADA;
     }
 
     //METODOS GET
@@ -47,6 +47,15 @@ public class Butaca {
     
     public boolean liberar() {
     if (estado == EstadoButaca.OCUPADA) {
+        estado = EstadoButaca.LIBRE;
+        return true;
+    }
+
+    return false;
+    }
+    
+    public boolean cancelarReserva() {
+    if (estado == EstadoButaca.RESERVADA) {
         estado = EstadoButaca.LIBRE;
         return true;
     }
