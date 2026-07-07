@@ -239,9 +239,9 @@ public class Salas extends javax.swing.JFrame {
         SalaCine salaSeleccionada =
         (SalaCine) botonSeleccionado.getClientProperty("sala");
         
-        VistaSala ventana = new VistaSala(salaSeleccionada);
-        ventana.setVisible(true);
-        this.dispose();
+        VistaSala ventana = new VistaSala(salaSeleccionada, this);
+ventana.setVisible(true);
+this.setVisible(false);
 
     }
 }

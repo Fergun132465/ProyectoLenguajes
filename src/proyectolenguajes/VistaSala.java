@@ -23,15 +23,17 @@ public class VistaSala extends javax.swing.JFrame {
     private JPanel panelNumeros;
     private Butaca butacaSeleccionada;
     private JButton botonButacaSeleccionada;
+    private Salas ventanaSalas;
     /**
      * Creates new form VistaSala
      */
-    public VistaSala(SalaCine sala) {
+    public VistaSala(SalaCine sala, Salas ventanaSalas) {
         initComponents();
         
         setLocationRelativeTo(null);
         
         this.sala = sala;
+        this.ventanaSalas = ventanaSalas;
         
         //CREACION DE LOS COMPONENTES DENTRO DE PanelAsientos
         panelLetras = new JPanel();
@@ -85,13 +87,32 @@ public class VistaSala extends javax.swing.JFrame {
             for (int columna = 0; columna < columnas; columna++) {
                 Butaca butaca = sala.getButaca(fila, columna);
 
-                JButton botonButaca = new JButton("R");
+                JButton botonButaca = new JButton("L");
+                
+                switch (butaca.getEstado()) {
+
+                    case LIBRE:
+                        botonButaca.setText("L");
+                        botonButaca.setBackground(java.awt.Color.decode("#32C732"));
+                        break;
+
+                    case RESERVADA:
+                        botonButaca.setText("R");
+                        botonButaca.setBackground(java.awt.Color.YELLOW);
+                        break;
+
+                    case OCUPADA:
+                        botonButaca.setText("O");
+                        botonButaca.setBackground(java.awt.Color.decode("#FF6B6B"));
+                        break;
+                }
+                
                 botonButaca.setPreferredSize(new Dimension(anchoButaca, altoButaca));
                 
                 botonButaca.addActionListener(this::seleccionarButaca);
 
                 botonButaca.putClientProperty("butaca", butaca);
-
+                
                 panelAsientos.add(botonButaca);
             }
         }
@@ -144,7 +165,7 @@ public class VistaSala extends javax.swing.JFrame {
         switch (butacaSeleccionada.getEstado()) {
             case LIBRE:
                 botonButacaSeleccionada.setText("L");
-                botonButacaSeleccionada.setBackground(null);
+                botonButacaSeleccionada.setBackground(java.awt.Color.decode("#32C732"));
                 break;
             case RESERVADA:
                 botonButacaSeleccionada.setText("R");
@@ -205,8 +226,8 @@ public class VistaSala extends javax.swing.JFrame {
         lblButaca = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBReservarButaca = new javax.swing.JButton();
+        jBOcuparButaca = new javax.swing.JButton();
         jBCancelarReserva = new javax.swing.JButton();
         jBLiberarButaca = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -214,6 +235,8 @@ public class VistaSala extends javax.swing.JFrame {
         lblButacasReservadas = new javax.swing.JLabel();
         lblButacasOcupadas = new javax.swing.JLabel();
         lblTotalButacas = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jBVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,11 +246,11 @@ public class VistaSala extends javax.swing.JFrame {
         panelAsientos.setLayout(panelAsientosLayout);
         panelAsientosLayout.setHorizontalGroup(
             panelAsientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 603, Short.MAX_VALUE)
         );
         panelAsientosLayout.setVerticalGroup(
             panelAsientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 614, Short.MAX_VALUE)
         );
 
         scrollAsientos.setViewportView(panelAsientos);
@@ -260,11 +283,21 @@ public class VistaSala extends javax.swing.JFrame {
 
         jPanel3.setLayout(new java.awt.GridLayout(4, 0, 0, 10));
 
-        jButton1.setText("jButton1");
-        jPanel3.add(jButton1);
+        jBReservarButaca.setText("Reservar butaca");
+        jBReservarButaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBReservarButacaActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBReservarButaca);
 
-        jButton2.setText("jButton2");
-        jPanel3.add(jButton2);
+        jBOcuparButaca.setText("Ocupar butaca");
+        jBOcuparButaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBOcuparButacaActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBOcuparButaca);
 
         jBCancelarReserva.setText("Cancelar Reserva");
         jBCancelarReserva.addActionListener(new java.awt.event.ActionListener() {
@@ -304,24 +337,50 @@ public class VistaSala extends javax.swing.JFrame {
 
         panelDerecho.add(jPanel2);
 
+        jBVolver.setText("Volver");
+        jBVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVolverActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBVolver)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBVolver)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollAsientos)
+                .addComponent(scrollAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDerecho, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollAsientos)
-                    .addComponent(panelDerecho, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE))
+                    .addComponent(panelDerecho, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -366,15 +425,64 @@ public class VistaSala extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBLiberarButacaActionPerformed
 
+    //EVENTO RESERVAR BUTACA (LIBRE -> RESERVADA)
+    private void jBReservarButacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReservarButacaActionPerformed
+        
+            if (butacaSeleccionada == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Seleccione una butaca.");
+            return;
+        }
+
+        if (butacaSeleccionada.reservar()) {
+
+            actualizarButacaSeleccionadaUI();
+            actualizarContadores();
+
+        } else {
+
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Solo puede reservar una butaca libre.");
+        }
+    }//GEN-LAST:event_jBReservarButacaActionPerformed
+
+    //EVENTO OCUPAR BUTACA (LIBRE -> OCUPADA)
+    private void jBOcuparButacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOcuparButacaActionPerformed
+            if (butacaSeleccionada == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Seleccione una butaca.");
+            return;
+        }
+
+        if (butacaSeleccionada.ocupar()) {
+
+            actualizarButacaSeleccionadaUI();
+            actualizarContadores();
+
+        } else {
+
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "La butaca ya está ocupada.");
+        }
+    }//GEN-LAST:event_jBOcuparButacaActionPerformed
+
+    //EVENTO VOLVER A LA SELEECION DE SALAS
+    private void jBVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverActionPerformed
+        ventanaSalas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBVolverActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelarReserva;
     private javax.swing.JButton jBLiberarButaca;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBOcuparButaca;
+    private javax.swing.JButton jBReservarButaca;
+    private javax.swing.JButton jBVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblButaca;
     private javax.swing.JLabel lblButacasLibres;
     private javax.swing.JLabel lblButacasOcupadas;

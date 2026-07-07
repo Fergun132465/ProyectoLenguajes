@@ -10,7 +10,7 @@ public class Butaca {
     public Butaca(int fila, int columna) {
     this.fila = fila;
     this.columna = columna;
-    this.estado = EstadoButaca.OCUPADA;
+    this.estado = EstadoButaca.LIBRE;
     }
 
     //METODOS GET
