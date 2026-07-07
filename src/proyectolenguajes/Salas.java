@@ -80,9 +80,8 @@ public class Salas extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(btnAgregarSala)
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addGap(0, 540, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(44, Short.MAX_VALUE)
@@ -152,7 +151,7 @@ public class Salas extends javax.swing.JFrame {
                 );
                 return;
             } else if (filas > 26 || columnas > 26){
-                JOptionPane.showMessageDialog(this, "El maximo de filas y columnas es 27");
+                JOptionPane.showMessageDialog(this, "El maximo de filas y columnas es 26");
                 return;
             }
             
@@ -168,11 +167,10 @@ public class Salas extends javax.swing.JFrame {
 
             listaSalas.add(nuevaSala);
 
+            //CREACION DEL BOTON SALA CON SUS PROPIEDADES
             JButton botonSala = new JButton(
                 "Sala " + nuevaSala.getNumero()
             );
-            
-            //CREACION DEL BOTON SALA CON SUS PROPIEDADES
             
             botonSala.putClientProperty("sala", nuevaSala);
             botonSala.addActionListener(this::seleccionarSala);
